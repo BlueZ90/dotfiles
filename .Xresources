@@ -77,7 +77,7 @@
 *color7:                S_base02
 *color15:               S_base03
 
-Xft.dpi: 75
+	Xft.dpi: 96
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
 Xft.hintstyle:  hintfull
@@ -98,13 +98,13 @@ Xft.rgba: rgb
 ! rxvt-specific (not used)
 urxvt*scrollBar: false
 ! *font: xft:Monaco:size=11
-*font: xft:Terminus:size=12
+! *font: xft:Terminus:size=15
 ! *font: xft:Source Code Pro:size=13
-! *font: xft:Inconsolata:size=13
+*font: xft:Inconsolata:size=16
 ! *font: xft:Inconsolata for Powerline:size=13
 ! *font: Meslo:size=40
 !
-urxvt.letterSpace: -2
+urxvt.letterSpace: -1
 urxvt*termName: rxvt
 !!*font: xft:Andale Mono:size=12
 

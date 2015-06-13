@@ -1,28 +1,7 @@
+execute pathogen#infect()
+
 set nocompatible
 filetype off
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'kien/ctrlp.vim'
-Plugin 'othree/html5.vim'
-Plugin 'godlygeek/tabular'
-Plugin 'vim-scripts/taglist.vim'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'jceb/editqf'
-Plugin 'tommcdo/vim-exchange'
-Plugin 'tpope/vim-fugitive'
-Plugin 'groenewege/vim-less'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-surround'
-Plugin 'dhruvasagar/vim-table-mode'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'benmills/vimux'
-Plugin 'vim-pandoc/vim-pandoc'
-Plugin 'vim-pandoc/vim-pandoc-syntax'
-Plugin 'scrooloose/syntastic'
-call vundle#end()
 
 so ~/.vim/custom_functions.vim
 "===============================================================================
@@ -59,15 +38,6 @@ let g:ctrlp_prompt_mappings = {
 let g:table_mode_toggle_map = "q"
 let g:user_zen_expandabbr_key='<C-y>,'
 let g:EasyMotion_leader_key = '<space>'
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers = ['pylint']
 
 
 "============================================================================}}}

@@ -43,10 +43,6 @@ PATH="$PATH:$HOME/.gem/ruby/2.1.0/bin"
 PATH="$PATH:$HOME/.cabal/bin"
 PATH="$PATH:$HOME/bin"
 export GOPATH="$GOPATH:$HOME/.go"
-hash -d acc="$HOME/data/account"
-hash -d vid="$HOME/data/video"
-hash -d img="$HOME/data/images"
-hash -d cam="$HOME/data/images/webcam"
 
 if [[ ! -f /tmp/todoread ]]; then
     todo
