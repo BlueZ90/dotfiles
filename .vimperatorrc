@@ -1,0 +1,5 @@
+command! proxy :set! network.proxy.type=1
+command! noproxy :set! network.proxy.type=0
+set gui=nonavigation
+
+autocmd LocationChange .* js modes.passAllKeys = /fastmail.fm/.test(buffer.URL)

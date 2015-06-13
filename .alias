@@ -1,0 +1,287 @@
+# Colors                                                                     {{{
+alias ls="ls --color=auto"
+alias grep="grep --color=auto"
+alias tmux="TERM=screen-256color-bce tmux"
+
+#                                                                            }}}
+# Shortcuts                                                                  {{{
+alias notouchpad="synclient TouchpadOff=1"
+alias touchpad="synclient TouchpadOff=0"
+alias l="ls -lsh"
+alias la="l -a"
+# alias e="$EDITOR"
+alias py="python2"
+alias k="setxkbmap"
+alias mplayer-f="mplayer -vf scale=1366:-2"
+alias upload="mupload"
+alias todo="cat ~/.todo"
+alias vitodo="$EDITOR ~/.todo"
+alias vianime="$EDITOR ~/.anime_list"
+alias vixkcd="$EDITOR ~/.xkcd_favorites"
+alias :q="exit"
+alias :wq=":q"
+alias tm="tmux"
+alias ..="cd .."
+alias 2..="cd ../.."
+alias 3..="cd ../../.."
+alias 4..="cd ../../../.."
+alias 5..="cd ../../../../.."
+alias wine-steam="(cd $HOME/.local/share/wineprefixes/steam/drive_c/Program\ Files/Steam && WINEPREFIX=\"$HOME/.local/share/wineprefixes/steam\" optirun wine Steam.exe -no-dwrite)"
+alias t="tail"
+alias h="head"
+# alias d="drop"
+alias g="grep"
+alias j="jobs"
+alias cam="mplayer tv:// -tv driver=v4l2:width=640:height=480:device=/dev/video0 -fps 15 -vf screenshot"
+alias mupen="optirun mupen64plus --fullscreen"
+alias mshare="sshfs mephory:shared ~/shared"
+alias psg="ps -e | grep"
+alias toresolv="tor-resolve"
+alias tvtwoscreen="xrandr --output HDMI1 --auto --output LVDS1 --auto --right-of HDMI1"
+alias tvtwo="xrandr --output LVDS1 --auto --output HDMI1 --auto --right-of LVDS1"
+alias twoscreen="xrandr --output LVDS1 --auto --output VGA1 --auto --right-of LVDS1"
+alias onescreen="xrandr --output LVDS1 --auto --output HDMI1 --off"
+alias xlight="xrdb ~/.Xresources"
+alias xdark="xrdb ~/.Xresources-dark"
+alias pi="ssh pi -t tmux att"
+alias tmc="teamocil --here"
+alias tmlayout="teamocil --here"
+alias ]="git diff"
+alias ]]="git diff --staged"
+alias st="git st"
+alias xdark="change-termcolors $HOME/.Xresources"
+alias xlight="change-termcolors $HOME/.Xresources-light"
+alias oot="mupen $HOME/data/rom/*Ocarina*"
+alias screens="xrandr --output LVDS1 --off && xrandr --output LVDS1 --off --output HDMI1 --auto --output VGA1 --auto --right-of HDMI1"
+
+#                                                                            }}}
+# dice                                                                       {{{
+alias w2='echo $((RANDOM%2+1))'
+alias w3='echo $((RANDOM%3+1))'
+alias w4='echo $((RANDOM%4+1))'
+alias w5='echo $((RANDOM%5+1))'
+alias w6='echo $((RANDOM%6+1))'
+alias w7='echo $((RANDOM%7+1))'
+alias w8='echo $((RANDOM%8+1))'
+alias w9='echo $((RANDOM%9+1))'
+alias w10='echo $((RANDOM%10+1))'
+alias w11='echo $((RANDOM%11+1))'
+alias w12='echo $((RANDOM%12+1))'
+alias w13='echo $((RANDOM%13+1))'
+alias w14='echo $((RANDOM%14+1))'
+alias w15='echo $((RANDOM%15+1))'
+alias w16='echo $((RANDOM%16+1))'
+alias w17='echo $((RANDOM%17+1))'
+alias w18='echo $((RANDOM%18+1))'
+alias w19='echo $((RANDOM%19+1))'
+alias w20='echo $((RANDOM%20+1))'
+#                                                                            }}}
+
+#                                                                            }}}
+# Typos                                                                      {{{
+alias sl="ls"
+alias Grep="grep"
+alias Mpc="mpc"
+alias les="less"
+alias Less="less"
+
+#                                                                            }}}
+# Other                                                                      {{{
+alias qqwrv="PS1=''"
+alias xcopy="xsel -bi"
+alias xpaste="xsel -b"
+alias p="xsel -b"
+#alias record="recordmydesktop --v_bitrate 2000000 --no-sound"
+alias record="ffmpeg -f x11grab -s 1366x768 -r 25 -i :0"
+alias wocs="tr -cs A-Za-z '\n' | tr A-Z a-z | sort | uniq -c | sort -rn" # Prints number of occurences of words
+alias histat="cat ~/.history | sed 's/^[0-9 ]*//' | sed 's/ *| */\n/g' | sort | uniq -c | sort -rn | head -n 100"
+alias tags="tag -l"
+alias temp="acpi -t"
+alias myip="curl \"http://mephory.com/ip/\" -q"
+alias html-pandoc="pandoc -H /home/mephory/data/other/pandoc.css"
+
+#                                                                            }}}
+# Extensions                                                                 {{{
+alias -s png="feh"
+alias -s jpg="feh"
+alias -s bmp="feh"
+alias -s gif="feh"
+alias -s mov="mplayer"
+alias -s mp4="mplayer"
+alias -s avi="mplayer"
+alias -s mp3="mplayer"
+alias -s wav="mplayer"
+alias -s ogg="mplayer"
+alias -s pdf="firefox"
+alias -s exe="wine"
+alias -s txt="$EDITOR"
+
+#                                                                            }}}
+# Functions                                                                  {{{
+
+
+function drop() {
+    tail -n +$(($1+1)) ${@: 2}
+}
+
+function take() {
+    head -n +$(($1)) ${@: 2}
+}
+
+function pick() {
+    head -n$1 | tail -n1
+}
+
+# Swap two files
+function swapfiles() {
+    if [ $# -ne 2 ]; then
+        echo "USAGE: $0 <file1> <file2>";
+    else
+        mv $1 $1.SWAP;
+        mv $2 $1;
+        mv $1.SWAP $2;
+    fi
+}
+
+# Execute git pull in the folder matching the <wildcard pattern> on mephory.com
+function remote-pull() {
+    if [ $# -ne 1 ]; then
+        echo "USAGE: $0 <wildcard pattern>";
+    else
+        ssh mephory "cd '/var/www/'*'$1'* && git pull";
+    fi
+}
+
+function update-mephory.com() {
+    ssh mephory "cd '/var/www/mephory.com' && git pull";
+}
+
+# Prepend N to a command to get notified when the command has finished
+function N() {
+    if [ $# -eq 1 ]
+    then
+        $1 && \
+        notify-send "$1 finished" "Your job has finished successfully." || \
+        notify-send "$1 failed" "Your job has failed."
+    else
+        $1 ${@: 2} && \
+        notify-send "$1 finished" "Your job has finished successfully." || \
+        notify-send "$1 failed" "Your job has failed."
+    fi
+
+}
+
+# Quick-Calc via python
+function qc() {
+    python -c "from math import *; print($1)"
+}
+
+# Grep in all files matching a pattern
+function grepin() {
+    find . -iname "$1" -exec grep ${@: 2} -H {} --color=auto \;
+}
+
+# Shorten a url via google url shortener
+function shorturl() {
+    if [[ -z $1 ]]; then
+        print "USAGE: $0 <URL>"
+        return 1
+    fi
+
+    url=$1
+
+    # Prepend 'http://' to given URL where necessary for later output.
+    if [[ ${url} != http(s|)://* ]]; then
+        url='http://'${url}
+    fi
+
+    api='https://www.googleapis.com/urlshortener/v1/url'
+    contenttype="Content-Type: application/json"
+    json="{\"longUrl\": \"${url}\"}"
+    data=(${"$(curl --silent -H ${contenttype} -d ${json} $api)"})
+    echo $data | grep "id" | cut -d\" -f4
+}
+
+# Backup a file
+function backup() {
+    cp $1 $1.$(date +"%Y-%m-%d_%H-%M-%S")
+}
+function backupmv() {
+    mv $1 $1.$(date +"%Y-%m-%d_%H-%M-%S")
+}
+
+# Display a reference of zsh globs
+function zsh-glob-help() {
+    echo -e "
+    /      directories
+    .      plain files
+    @      symbolic links
+    =      sockets
+    p      named pipes (FIFOs)
+    *      executable plain files (0100)
+    %      device files (character or block special)
+    %b     block special files
+    %c     character special files
+    r      owner-readable files (0400)
+    w      owner-writable files (0200)
+    x      owner-executable files (0100)
+    A      group-readable files (0040)
+    I      group-writable files (0020)
+    E      group-executable files (0010)
+    R      world-readable files (0004)
+    W      world-writable files (0002)
+    X      world-executable files (0001)
+    s      setuid files (04000)
+    S      setgid files (02000)
+    t      files with the sticky bit (01000)
+
+  print *(m-1)          # Files modified up to a day ago
+  print *(a1)           # Files accessed a day ago
+  print *(@)            # Just symlinks
+  print *(Lk+50)        # Files bigger than 50 kilobytes
+  print *(Lk-50)        # Files smaller than 50 kilobytes
+  print **/*.c          # All *.c files recursively starting in \$PWD
+  print **/*.c~file.c   # Same as above, but excluding 'file.c'
+  print (foo|bar).*     # Files starting with 'foo' or 'bar'
+  print *~*.*           # All Files that do not contain a dot
+  chmod 644 *(.^x)      # make all plain non-executable files publically readable
+  print -l *(.c|.h)     # Lists *.c and *.h
+  print **/*(g:users:)  # Recursively match all files that are owned by group 'users'
+  echo /proc/*/cwd(:h:t:s/self//) # Analogous to >ps ax | awk '{print $1}'<"
+}
+
+function rec() {
+    record "/home/mephory/data/video/recorded/$(uuidgen).mkv"
+}
+
+function cch() {
+    xdark;
+    ssh $@;
+    xlight;
+}
+
+function mwatch() {
+    if [ $# -eq 1 ]
+    then
+        mpv --script $HOME/.config/mpv/watch_later.lua $1/*
+    else
+        mpv --script $HOME/.config/mpv/watch_later.lua ./*
+    fi
+}
+
+# Directly cd into ~/code with cdc. It even has tab completion! :-)
+function cdc() { cd ~/code/$1; }
+function _cdc() { _files -W ~/code -/; }
+compdef _cdc cdc
+
+#                                                                            }}}
+# Unused                                                                     {{{
+alias pkguse="sudo vim /etc/portage/package.use"
+alias pkgkw="sudo vim /etc/portage/package.accept_keywords"
+alias pkgmask="sudo vim /etc/portage/package.mask"
+alias pkglicense="sudo vim /etc/portage/package.license"
+alias upschule="scp -r $HOME/data/schule mephory:data"
+# alias proxy_schule="export http_proxy=http://S-32100:371767@172.17.0.1:8080"
+
+#                                                                            }}}
+alias vialias="$EDITOR ~/.alias && source ~/.alias"
